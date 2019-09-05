@@ -1,9 +1,7 @@
 #! /usr/bin/env node
-const opener = require('opener')
 const shell = require('./shellHelpers')
 
 const [task] = process.argv.slice(2)
-const [port] = process.argv.slice(3)
 const processExit = (err, code) => {
     if (err) {
         process.exit(1)
@@ -34,10 +32,7 @@ switch (task) {
         // execute multiple commands in series
         shell.series(
             [setEnv('development'), 'node node_modules/my-webpack-generator/scripts/start.js'],
-            (err, code) => {
-                processExit(err, code)
-                opener(`http://localhost:${port || '8500'}`)
-            }
+            processExit
         )
         break
     }

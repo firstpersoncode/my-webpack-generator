@@ -42,7 +42,8 @@ const client = (options) =>
         ...(options.mode === 'development'
             ? [
                   new BundleAnalyzerPlugin({
-                      port: 8502,
+                      analyzerPort: 8502,
+                      openAnalyzer: false,
                   }),
               ]
             : []),

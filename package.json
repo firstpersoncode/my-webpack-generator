@@ -1,6 +1,6 @@
 {
   "name": "my-webpack-generator",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "",
   "scripts": {
     "test": "jest --coverage --runInBand",
@@ -33,7 +33,6 @@
     "eslint-plugin-unicorn": "^10.0.0",
     "jest": "^24.9.0",
     "npm-check": "^5.9.0",
-    "opener": "^1.5.1",
     "prettier": "^1.14.2"
   },
   "dependencies": {
