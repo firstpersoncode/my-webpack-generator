@@ -28,6 +28,15 @@ const shared = (options) =>
             ? [new WriteFileWebpackPlugin(), new webpack.HotModuleReplacementPlugin()]
             : []),
         ...(options.plugins && options.plugins.length ? options.plugins : []),
+        ...(options.analyze
+            ? [
+                  new BundleAnalyzerPlugin({
+                      analyzerPort: options.analyze.port || 8502,
+                      openAnalyzer: false,
+                      generateStatsFile: options.mode === 'production',
+                  }),
+              ]
+            : []),
     ].filter(Boolean)
 
 const client = (options) =>
@@ -39,14 +48,6 @@ const client = (options) =>
         new CaseSensitivePathsPlugin(),
         new IgnorePlugin(/^\.\/locale$/, /moment$/),
         new ManifestPlugin({ fileName: 'manifest.json' }),
-        ...(options.mode === 'development'
-            ? [
-                  new BundleAnalyzerPlugin({
-                      analyzerPort: 8502,
-                      openAnalyzer: false,
-                  }),
-              ]
-            : []),
     ].filter(Boolean)
 
 const server = [
