@@ -1,0 +1,60 @@
+{
+  "name": "my-webpack-generator",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --coverage --runInBand",
+    "check": "npm-check"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "webpack",
+    "config",
+    "generator",
+    "javascript",
+    "typescript",
+    "es6",
+    "react",
+    "type"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "jest": "^24.9.0",
+    "npm-check": "^5.9.0",
+    "prettier": "^1.14.2"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "circular-dependency-plugin": "^5.2.0",
+    "fork-ts-checker-webpack-plugin": "^1.5.0",
+    "raf": "^3.4.1",
+    "raw-loader": "^3.1.0",
+    "ts-loader": "^6.0.4",
+    "typescript": ">= 2",
+    "webpack": "^4.16.5",
+    "webpack-cli": ">= 3"
+  },
+  "peerDependencies": {
+    "@babel/polyfill": ">= 7",
+    "typescript": ">= 2",
+    "webpack-cli": ">= 3"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "collectCoverageFrom": [
+      "src/*.@(ts|tsx|js|jsx)"
+    ]
+  }
+}
