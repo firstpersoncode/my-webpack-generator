@@ -8,8 +8,6 @@ This utility will create a webpack config that should function as a drop-in for 
 
 It features:
 
--   Tree shaking
--   Circular dependency checking
 -   Synthetic default imports (TypeScript)
 -   Project root alias (`^`)
 -   Type checking in separate worker
