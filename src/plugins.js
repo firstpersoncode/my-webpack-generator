@@ -31,7 +31,8 @@ const shared = (options) =>
         ...(options.analyze
             ? [
                   new BundleAnalyzerPlugin({
-                      analyzerPort: options.analyze.port || 8502,
+                      analyzerMode: 'static',
+                      // analyzerPort: options.analyze.port || 8502,
                       openAnalyzer: false,
                       generateStatsFile: options.mode === 'production',
                   }),
@@ -39,16 +40,15 @@ const shared = (options) =>
             : []),
     ].filter(Boolean)
 
-const client = (options) =>
-    [
-        new DefinePlugin({
-            __SERVER__: 'false',
-            __BROWSER__: 'true',
-        }),
-        new CaseSensitivePathsPlugin(),
-        new IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new ManifestPlugin({ fileName: 'manifest.json' }),
-    ].filter(Boolean)
+const client = [
+    new DefinePlugin({
+        __SERVER__: 'false',
+        __BROWSER__: 'true',
+    }),
+    new CaseSensitivePathsPlugin(),
+    new IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new ManifestPlugin({ fileName: 'manifest.json' }),
+].filter(Boolean)
 
 const server = [
     new DefinePlugin({
