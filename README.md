@@ -233,7 +233,12 @@ $ my-webpack-generator build
 
 ## TODO:
 
-[x] Scripts
-[x] Multiple Compiler
-[] Single Compiler
-[] TypeScript distribution config
+-   [x] Scripts
+-   [x] Multiple Compiler
+-   [] Single Compiler
+-   [] TypeScript distribution config
+-   [] bundle report service
+
+## License
+
+MIT.
