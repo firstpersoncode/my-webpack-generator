@@ -304,7 +304,8 @@ describe("createWebpackConfig", () => {
     })
 
     expect(config.entry).toEqual([
-      require.resolve("raf/polyfill"),
+      require.resolve("core-js/stable"),
+      require.resolve("regenerator-runtime/runtime"),
       path.resolve(constants.CWD, "src/index.ts")
     ])
 
@@ -334,11 +335,13 @@ describe("createWebpackConfig", () => {
 
     expect(config.entry).toEqual({
       frontend: [
-        require.resolve("raf/polyfill"),
+        require.resolve("core-js/stable"),
+        require.resolve("regenerator-runtime/runtime"),
         path.resolve(constants.CWD, "src/index.ts")
       ],
       admin: [
-        require.resolve("raf/polyfill"),
+        require.resolve("core-js/stable"),
+        require.resolve("regenerator-runtime/runtime"),
         path.resolve(constants.CWD, "src/admin.ts")
       ]
     })

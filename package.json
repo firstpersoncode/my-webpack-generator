@@ -21,9 +21,11 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "core-js": "^3.2.1",
     "jest": "^24.9.0",
     "npm-check": "^5.9.0",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "regenerator-runtime": "^0.13.3"
   },
   "dependencies": {
     "@babel/core": "^7.1.2",
