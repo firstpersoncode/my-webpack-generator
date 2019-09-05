@@ -33,6 +33,7 @@
     "eslint-plugin-unicorn": "^10.0.0",
     "jest": "^24.9.0",
     "npm-check": "^5.9.0",
+    "opener": "^1.5.1",
     "prettier": "^1.14.2"
   },
   "dependencies": {

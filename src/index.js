@@ -58,7 +58,7 @@ module.exports = (options) => {
         resolve: resolvers(options, rootDir),
         plugins: [
             ...plugins.shared(options),
-            ...(options.isServer ? plugins.server : plugins.client),
+            ...(options.isServer ? plugins.server : plugins.client(options)),
         ],
     }
 }
