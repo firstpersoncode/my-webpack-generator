@@ -38,7 +38,6 @@ module.exports = (options) => {
         stats: {
             timings: true,
         },
-        devtool: 'source-map',
         ...(options.isServer
             ? {}
             : options.mode === 'production'
