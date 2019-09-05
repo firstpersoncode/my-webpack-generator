@@ -2,9 +2,9 @@ const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-
 const CircularDependencyPlugin = require('circular-dependency-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 
 const constants = require('./constants')
 
@@ -23,6 +23,9 @@ const shared = (options) =>
             cwd: constants.CWD,
         }),
         new EnvironmentPlugin(options.env || {}),
+        ...(options.mode === 'development'
+            ? [new WriteFileWebpackPlugin(), new webpack.HotModuleReplacementPlugin()]
+            : []),
         ...(options.plugins && options.plugins.length ? options.plugins : []),
     ].filter(Boolean)
 
