@@ -19,7 +19,10 @@ It features:
 ## Installation
 
 ```shell
-npm i my-webpack-creator -S
+# with npm
+npm i my-webpack-generator -S
+# with yarn
+yarn add my-webpack-generator
 ```
 
 Install peer dependencies (TypeScript must be at least version 2):
