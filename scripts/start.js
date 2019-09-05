@@ -9,11 +9,9 @@ const webpackConfig = require('./config')(process.env.NODE_ENV || 'development')
 
 const app = express()
 
-const WEBPACK_PORT =
-    process.env.WEBPACK_PORT ||
-    (!isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) + 1 : 8501)
+const WEBPACK_PORT = 8501
 
-const DEVSERVER_HOST = process.env.DEVSERVER_HOST || 'http://localhost'
+const DEVSERVER_HOST = 'http://localhost'
 
 const start = async () => {
     const [clientConfig, serverConfig] = webpackConfig
