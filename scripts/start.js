@@ -5,7 +5,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const { logMessage, compilerPromise } = require('./helpers')
-const webpackConfig = require('./config')(process.env.NODE_ENV || 'development')
+const webpackConfig = require('./config/webpack')(process.env.NODE_ENV || 'development')
 
 const app = express()
 
