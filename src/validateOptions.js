@@ -13,13 +13,13 @@ module.exports = (options) => {
         throw new Error('No "resolve" in config options')
     } else if (
         !('ext' in options.resolve) ||
-        !Array.isArray(options.resolve) ||
+        !Array.isArray(options.resolve.ext) ||
         !options.resolve.ext.length
     ) {
         throw new Error('Invalid "ext" in config options')
     } else if (
         !('modules' in options.resolve) ||
-        !Array.isArray(options.resolve) ||
+        !Array.isArray(options.resolve.ext) ||
         !options.resolve.modules.length
     ) {
         throw new Error('Invalid "modules" in config options')
