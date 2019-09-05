@@ -152,25 +152,27 @@ const fileLoaderServer = {
     ],
 }
 
-const client = (mode, generateSourceMap) => [
+const client = (options) => [
     {
         oneOf: [
-            babelLoader(mode),
-            cssModuleLoaderClient(generateSourceMap),
-            cssLoaderClient(generateSourceMap),
+            babelLoader(options.mode),
+            cssModuleLoaderClient(!options.omitSourceMap),
+            cssLoaderClient(!options.omitSourceMap),
             urlLoaderClient,
             fileLoaderClient,
+            ...(options.loaders && options.loaders.length ? options.loaders : []),
         ],
     },
 ]
-const server = (mode, generateSourceMap) => [
+const server = (options) => [
     {
         oneOf: [
-            babelLoader(mode),
-            cssModuleLoaderServer(generateSourceMap),
+            babelLoader(options.mode),
+            cssModuleLoaderServer(!options.omitSourceMap),
             cssLoaderServer,
             urlLoaderServer,
             fileLoaderServer,
+            ...(options.loaders && options.loaders.length ? options.loaders : []),
         ],
     },
 ]

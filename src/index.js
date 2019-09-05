@@ -48,9 +48,7 @@ module.exports = (options) => {
         entry,
         output,
         module: {
-            rules: options.isServer
-                ? loaders.server(options.mode, !options.omitSourceMap)
-                : loaders.client(options.mode, !options.omitSourceMap),
+            rules: options.isServer ? loaders.server(options) : loaders.client(options),
         },
         resolve: resolvers(options, rootDir),
         plugins: [

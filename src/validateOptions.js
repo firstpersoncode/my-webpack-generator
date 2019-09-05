@@ -9,6 +9,22 @@ module.exports = (options) => {
         throw new Error('"mode" option is invalid')
     }
 
+    if (!('resolve' in options)) {
+        throw new Error('No "resolve" in config options')
+    } else if (
+        !('ext' in options.resolve) ||
+        !Array.isArray(options.resolve) ||
+        !options.resolve.length
+    ) {
+        throw new Error('Invalid "ext" in config options')
+    } else if (
+        !('modules' in options.resolve) ||
+        !Array.isArray(options.resolve) ||
+        !options.resolve.length
+    ) {
+        throw new Error('Invalid "modules" in config options')
+    }
+
     if (!('input' in options)) {
         throw new Error('No "input" in config options')
     }
