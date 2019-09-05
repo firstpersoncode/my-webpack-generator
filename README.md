@@ -8,13 +8,13 @@ This utility will create a webpack config that should function as a drop-in for 
 
 It features:
 
-- Tree shaking
-- Circular dependency checking
-- Synthetic default imports (TypeScript)
-- Project root alias (`^`)
-- Type checking in separate worker
-- Transpiling from ES6+ (and React) to target browsers
-- Polyfilling ES6+ features
+-   Tree shaking
+-   Circular dependency checking
+-   Synthetic default imports (TypeScript)
+-   Project root alias (`^`)
+-   Type checking in separate worker
+-   Transpiling from ES6+ (and React) to target browsers
+-   Polyfilling ES6+ features
 
 ## Installation
 
@@ -33,55 +33,82 @@ npm i typescript@2 webpack-cli@3 webpack@4 @babel/polyfill@7 -S
 
 ## Setup
 
-### Creating your config
+### Creating your config file
 
-Create a file called `webpack.config.js` and add the following contents, adjusting options as desired.
+Create a file called `index.js` inside `config/webpack` and add the following contents, adjusting options as desired.
 
 This will bundle your `index.ts` file and all dependencies into a `bundle.js` in the `static/build/js` directory.
 
-`webpack.config.js`
+`config/webpack/index.js`
 
 ```js
 const myWebpackGenerator = require("my-webpack-generator");
 
 module.exports = myWebpackGenerator({
-  input: "./static/src/ts/index.ts",
-  outDir: "./static/build/js",
-  tsconfig: "./tsconfig.dist.json",
-  env: {
-    NODE_ENV: "production"
-  }
-});
-```
-
-If you require multiple bundles you can supply an object as the `input`. Files will be created in the `outDir` with names corresponding to the keys in your `input` object.
-
-The following config will create `static/build/js/frontend-bundle.js` and `static/build/js/admin-bundle.js`.
-
-`webpack.config.js`
-
-```js
-const myWebpackGenerator = require("my-webpack-generator");
-
-module.exports = myWebpackGenerator({
+  // required
+  mode: process.NODE_ENV || "development",
   input: {
-    frontend: "./static/src/ts/index.ts",
-    admin: "./static/src/ts/admin.ts"
+    bundle: "./static/src/ts/index.ts"
   },
   outDir: "./static/build/js",
   tsconfig: "./tsconfig.dist.json",
+  publicPath: '/',
+  resolve: {
+      ext: ["js", "ts", ...],
+      modules: ["static", "node_modules", ...],
+  },
+
+  // optional
+  omitSourceMap: false,
+  isServer: false,
+  plugins: [
+      // by default this already have plugins packed with the generator for analyzer, hot module etc..
+      // you can add your own here if you want
+      // eg:
+      // new CopyPlugin([
+      //     {
+      //         from: 'static/src/locales',
+      //         to: path.join('static/build', 'locales'),
+      //         ignore: '*.missing.json',
+      //     },
+      // ]),
+  ],
+  loaders: [
+    // by default this already have babel, typescript, css, postcss, svg, fileloader
+    // you can add your own loader here if you want..
+    // eg:
+    // {
+    //   test: /\.(js|jsx|ts|tsx|mjs)$/,
+    //   exclude: /node_modules/,
+    //   loader: require.resolve('babel-loader'),
+    // }
+  ],
   env: {
     NODE_ENV: "production"
   }
 });
 ```
 
-If you would like to be able to import "raw" files as strings, you can provide a `rawFileExtensions` option, with a list of file extension that should be imported as strings e.g.
+If you require multiple bundles you can supply more than 1 entry in `input`. Files will be created in the `outDir` with names corresponding to the keys in your `input` object.
+
+The following generator will create `static/build/js/frontend.js` and `static/build/js/admin.js`.
+
+`config/webpack/index.js`
 
 ```js
-{
-  rawFileExtensions: ["html", "xml", "txt", "csv"];
-}
+const myWebpackGenerator = require('my-webpack-generator')
+
+module.exports = myWebpackGenerator({
+    input: {
+        frontend: './static/src/ts/index.ts',
+        admin: './static/src/ts/admin.ts',
+    },
+    outDir: './static/build/js',
+    tsconfig: './tsconfig.dist.json',
+    env: {
+        NODE_ENV: 'production',
+    },
+})
 ```
 
 If you require multiple bundles, but your source files do not both have the same parent directory, you will have to manually supply a `rootDir` option in order to use the root dir alias (`^`) e.g.
@@ -96,14 +123,11 @@ If you require multiple bundles, but your source files do not both have the same
 }
 ```
 
-In order to transpile files outside of the main file's parent directory or the specified `rootDir`, you will need to add an `include` option with the additional path(s) to transpile, though this is not usually necessary.
-
-The `include` option can be either a string or array of strings.
+If you require multiple generators to differentiate between client bundler and server bunder, you can add `isServer` flag.
 
 ```js
 {
-  input: 'src/index.ts',
-  include: ['./examples', './docs']
+    isServer: true
 }
 ```
 
@@ -141,32 +165,32 @@ You may enable type checking on Javascript files by setting `checkJs` to `true`.
 
 `tsconfig.json`
 
-```json
+<!-- ```json
 {
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
-    "pretty": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "allowJs": false,
-    "checkJs": false,
-    "jsx": "react",
-    "target": "es6",
-    "moduleResolution": "node",
-    "typeRoots": ["./node_modules/@types/", "./static/src/ts/types/"],
-    "baseUrl": "./",
-    "paths": {
-      "^*": ["./static/src/ts*"]
-    }
-  },
-  "include": ["./static/src/ts/"]
+    "compilerOptions": {
+        "strict": true,
+        "noImplicitAny": true,
+        "pretty": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "allowJs": false,
+        "checkJs": false,
+        "jsx": "react",
+        "target": "es6",
+        "moduleResolution": "node",
+        "typeRoots": ["./node_modules/@types/", "./static/src/ts/types/"],
+        "baseUrl": "./",
+        "paths": {
+            "^*": ["./static/src/ts*"]
+        }
+    },
+    "include": ["./static/src/ts/"]
 }
-```
+``` -->
 
-### TypeScript distribution config
+<!-- ### TypeScript distribution config
 
 Create a `tsconfig.dist.json` file in the root of your project and add the following contents, adjusting `exclude`, or replacing with `include` as needed.
 
@@ -176,10 +200,10 @@ This is necessary to allow us to build our source without also type checking our
 
 ```json
 {
-  "extends": "./tsconfig.json",
-  "exclude": ["./static/src/ts/__tests__/", "./static/src/ts/__mocks__/"]
+    "extends": "./tsconfig.json",
+    "exclude": ["./static/src/ts/__tests__/", "./static/src/ts/__mocks__/"]
 }
-```
+``` -->
 
 ### Build scripts
 
@@ -189,9 +213,27 @@ Add the following scripts to your `package.json`.
 
 ```json
 {
-  "scripts": {
-    "build-js": "webpack --mode production",
-    "watch-js": "webpack --mode development --watch"
-  }
+    "scripts": {
+        "start": "my-webpack-generator start",
+        "build": "my-webpack-generator build"
+    }
 }
 ```
+
+```bash
+$ my-webpack-generator start
+# start dev mode, by default the port will be 8500
+# you can visit http://localhost:8500 to start working on your project
+
+$ my-webpack-generator build
+# bundle your project
+```
+
+> As for now, the generator script require 2 generators (client and server) to run the compilers..
+
+## TODO:
+
+[x] Scripts
+[x] Multiple Compiler
+[] Single Compiler
+[] TypeScript distribution config
