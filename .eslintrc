@@ -1,0 +1,7 @@
+{
+  "extends": ["wiremore"],
+  "rules": {
+    "prettier/prettier": "error",
+    "semi": 0
+  }
+}
