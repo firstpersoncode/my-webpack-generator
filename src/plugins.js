@@ -12,7 +12,10 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 // const { clientOnly } = require('../../utils/helpers')
 
 // const env = require('../env')()
+
 const constants = require("./constants")
+
+const { EnvironmentPlugin, DefinePlugin, IgnorePlugin } = webpack
 
 const shared = options =>
   [
@@ -37,17 +40,17 @@ const shared = options =>
   ].filter(Boolean)
 
 const client = [
-  new webpack.DefinePlugin({
+  new DefinePlugin({
     __SERVER__: "false",
     __BROWSER__: "true"
   }),
   new CaseSensitivePathsPlugin(),
-  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  new IgnorePlugin(/^\.\/locale$/, /moment$/),
   new ManifestPlugin({ fileName: "manifest.json" })
 ].filter(Boolean)
 
 const server = [
-  new webpack.DefinePlugin({
+  new DefinePlugin({
     __SERVER__: "true",
     __BROWSER__: "false"
   })
