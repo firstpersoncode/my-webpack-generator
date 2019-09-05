@@ -21,11 +21,11 @@ const shared = options =>
   [
     new MiniCssExtractPlugin({
       filename:
-        options.env.NODE_ENV === "development"
+        options.env && options.env.NODE_ENV === "development"
           ? "[name].css"
           : "[name].[contenthash].css",
       chunkFilename:
-        options.env.NODE_ENV === "development"
+        options.env && options.env.NODE_ENV === "development"
           ? "[id].css"
           : "[id].[contenthash].css"
     }),
