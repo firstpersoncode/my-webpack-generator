@@ -32,9 +32,14 @@ module.exports = (options) => {
     return {
         ...(options.isServer ? baseServerConfig : baseClientConfig),
         mode: options.mode,
-        performance: {
-            hints: options.mode === 'production',
-        },
+
+        ...(options.mode === 'development'
+            ? {
+                  performance: {
+                      hints: false,
+                  },
+              }
+            : {}),
         stats: {
             timings: true,
         },
