@@ -1,5 +1,7 @@
 const path = require('path')
 
+const serveApp = require('./server')
+
 const createEntry = require('./createEntry')
 const getRootDir = require('./getRootDir')
 const validateOptions = require('./validateOptions')
@@ -10,6 +12,8 @@ const plugins = require('./plugins')
 
 const baseClientConfig = require('./baseClientConfig')
 const baseServerConfig = require('./baseServerConfig')
+
+exports.serveApp = serveApp
 
 module.exports = (options) => {
     validateOptions(options)
