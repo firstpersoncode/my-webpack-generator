@@ -10,7 +10,6 @@ const serverRenderer = require('./middleware/serverRenderer')
 const app = express()
 
 module.exports = (options) => {
-
     // Use Nginx or Apache to serve static assets in production or remove the if() around the following
     // lines to use the express.static middleware to serve assets for production (not recommended!)
     // if (process.env.NODE_ENV === 'development') {

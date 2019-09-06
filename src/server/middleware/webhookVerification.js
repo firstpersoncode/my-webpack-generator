@@ -1,5 +1,3 @@
-const express = require('express')
-
 // This middleware is useful in cases when you want to add webhooks that
 // call certain endpoints in your server side build. Add a WEBHOOK_TOKEN
 // env variable and use this middleware to protect against unwanted requests.

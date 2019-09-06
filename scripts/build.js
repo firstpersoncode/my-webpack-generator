@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const chalk = require('chalk')
 
-const webpackConfig = require('../../../config/webpack')(process.env.NODE_ENV || 'production')
+const webpackConfig = require('./config')(process.env.NODE_ENV || 'production')
 const { logMessage, compilerPromise } = require('./helpers')
 
 const single = async () => {

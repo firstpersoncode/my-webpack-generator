@@ -232,10 +232,13 @@ $ my-webpack-generator build
 ## TODO:
 
 -   [x] Scripts
+        -- [ ] generate config within scripts
 -   [x] Multiple Compiler
--   [] Single Compiler
--   [] TypeScript distribution config
--   [] bundle report service
+-   [x] Serve App
+        -- [ ] i18n middleware
+-   [ ] Single Compiler
+-   [ ] TypeScript distribution config
+-   [ ] bundle report service
 
 ## License
 

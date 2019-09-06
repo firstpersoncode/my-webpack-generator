@@ -13,9 +13,7 @@ const plugins = require('./plugins')
 const baseClientConfig = require('./baseClientConfig')
 const baseServerConfig = require('./baseServerConfig')
 
-exports.serveApp = serveApp
-
-exports.createConfig = (options) => {
+const createConfig = (options) => {
     validateOptions(options)
 
     const entry = createEntry(options)
@@ -66,3 +64,7 @@ exports.createConfig = (options) => {
         ],
     }
 }
+
+exports.serveApp = serveApp
+exports.createConfig = createConfig
+exports.default = createConfig
