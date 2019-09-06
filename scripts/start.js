@@ -13,7 +13,14 @@ const WEBPACK_PORT = 8501
 
 const DEVSERVER_HOST = 'http://localhost'
 
-const start = async () => {
+// const single = async () => {
+//   webpackConfig.entry.bundle = [
+//       `webpack-hot-middleware/client?path=${DEVSERVER_HOST}:${WEBPACK_PORT}/__webpack_hmr`,
+//       ...webpackConfig.entry.bundle,
+//   ]
+// }
+
+const multi = async () => {
     const [clientConfig, serverConfig] = webpackConfig
     clientConfig.entry.bundle = [
         `webpack-hot-middleware/client?path=${DEVSERVER_HOST}:${WEBPACK_PORT}/__webpack_hmr`,
@@ -111,6 +118,12 @@ const start = async () => {
         logMessage('An error occured. Exiting', 'error')
         process.exit(1)
     })
+}
+
+const start = () => {
+    if (Array.isArray(webpackConfig) && webpackConfig.length) {
+        multi()
+    }
 }
 
 start()
