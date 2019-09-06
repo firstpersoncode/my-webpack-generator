@@ -1,5 +1,4 @@
 const path = require('path')
-const { Response } = require('express')
 
 module.exports = (err, _req, res, _next) =>
     res.status(404).json({
@@ -10,9 +9,9 @@ module.exports = (err, _req, res, _next) =>
             process.env.NODE_ENV === 'development' &&
             (err.stack || '')
                 .split('\n')
-                .map((line: string) => line.trim())
-                .map((line: string) => line.split(path.sep).join('/'))
-                .map((line: string) =>
+                .map((line) => line.trim())
+                .map((line) => line.split(path.sep).join('/'))
+                .map((line) =>
                     line.replace(
                         process
                             .cwd()
