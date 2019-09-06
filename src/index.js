@@ -15,7 +15,7 @@ const baseServerConfig = require('./baseServerConfig')
 
 exports.serveApp = serveApp
 
-module.exports = (options) => {
+exports.createConfig = (options) => {
     validateOptions(options)
 
     const entry = createEntry(options)
