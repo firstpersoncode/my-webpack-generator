@@ -10,7 +10,7 @@ const single = async () => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     compiler.watch({}, (error, stats) => {
         if (!error && !stats.hasErrors()) {
-            console.log(stats.toString(webpackConfig.stats))
+            // console.log(stats.toString(webpackConfig.stats))
             return
         }
         console.error(chalk.red(stats.compilation.errors))
@@ -37,7 +37,7 @@ const multi = async () => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     serverCompiler.watch({}, (error, stats) => {
         if (!error && !stats.hasErrors()) {
-            console.log(stats.toString(serverConfig.stats))
+            // console.log(stats.toString(serverConfig.stats))
             return
         }
         console.error(chalk.red(stats.compilation.errors))
@@ -45,7 +45,7 @@ const multi = async () => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     clientCompiler.watch({}, (error, stats) => {
         if (!error && !stats.hasErrors()) {
-            console.log(stats.toString(clientConfig.stats))
+            // console.log(stats.toString(clientConfig.stats))
             return
         }
         console.error(chalk.red(stats.compilation.errors))

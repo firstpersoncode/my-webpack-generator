@@ -8,9 +8,9 @@ const errorHandler = require('./middleware/errorHandler')
 const serverRenderer = require('./middleware/serverRenderer')
 // const addStore = require('./middleware/addStore')
 // const webhookVerification = require('./middleware/webhookVerification')
+const app = express.default()
 
-const serveApp = (options) => {
-    const app = express.default()
+module.exports = (options) => {
     // Use Nginx or Apache to serve static assets in production or remove the if() around the following
     // lines to use the express.static middleware to serve assets for production (not recommended!)
     // if (process.env.NODE_ENV === 'development') {
@@ -42,5 +42,3 @@ const serveApp = (options) => {
 
     return app
 }
-
-module.exports = serveApp

@@ -74,7 +74,7 @@ const multi = async () => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     serverCompiler.watch(watchOptions, (error, stats) => {
         if (!error && !stats.hasErrors()) {
-            console.log(stats.toString(serverConfig.stats))
+            // console.log(stats.toString(serverConfig.stats))
             return
         }
 
