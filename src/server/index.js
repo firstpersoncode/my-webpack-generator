@@ -1,9 +1,8 @@
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
-const manifestHelpers = require('express-manifest-helpers')
 const bodyParser = require('body-parser')
-
+const manifestHelpers = require('express-manifest-helpers')
 const errorHandler = require('./middleware/errorHandler')
 const serverRenderer = require('./middleware/serverRenderer')
 // const addStore = require('./middleware/addStore')
@@ -11,6 +10,7 @@ const serverRenderer = require('./middleware/serverRenderer')
 const app = express()
 
 module.exports = (options) => {
+
     // Use Nginx or Apache to serve static assets in production or remove the if() around the following
     // lines to use the express.static middleware to serve assets for production (not recommended!)
     // if (process.env.NODE_ENV === 'development') {
@@ -31,7 +31,7 @@ module.exports = (options) => {
     const manifestPath = path.join(options.buildClient, options.publicPath)
 
     app.use(
-        manifestHelpers({
+        manifestHelpers.default({
             manifestPath: `${manifestPath}/manifest.json`,
         })
     )
