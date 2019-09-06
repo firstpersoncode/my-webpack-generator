@@ -8,7 +8,7 @@ const errorHandler = require('./middleware/errorHandler')
 const serverRenderer = require('./middleware/serverRenderer')
 // const addStore = require('./middleware/addStore')
 // const webhookVerification = require('./middleware/webhookVerification')
-const app = express.default()
+const app = express()
 
 module.exports = (options) => {
     // Use Nginx or Apache to serve static assets in production or remove the if() around the following
